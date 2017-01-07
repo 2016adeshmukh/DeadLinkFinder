@@ -1,0 +1,164 @@
+
+<html>
+<head><title>Ankit's and Harsha's Final Project</title></head>
+<body onload = "go()">
+	<div id = "left">
+		<p id = "direction">Enter URL Below: </p>
+		<input type = text name = "box" id = "txt" onKeydown= "Javascript: if (event.keyCode==13) check()" placeholder="www.example.com">
+		<p id="direction2">Enter Domain Below: </p>
+		<input type = text name = "box2" id = "txt2" onKeydown= "Javascript: if (event.keyCode==13) check()" placeholder="www.example.com">
+		<p> </p>
+		<button type=button id="doit" onclick="check()" accessKey="S"> <u>S</u>ubmit </button>
+	</div>
+	<div id="right">
+		<p id="descript"> This program will search through the given webpage and return any dead links that are found! </p>
+		<p id="brokenlinks"> </p>
+		<div id = "inright"></div>
+		
+	</div>
+	
+	<form id="myform" action="back.php" method="get" target="myframe">
+		<input type="hidden" id="temptxt" name="temptxt"> </input>
+		<input type="hidden" id="temptxt2" name="temptxt2"> </input>
+		<IFRAME name="myframe" style='display:none'> </IFRAME>
+	</form>
+</body>
+<script type="text/javascript">
+	broke=[];
+	function check()
+	{
+		document.getElementById("descript").innerHTML="Broken Links:";
+		urlsend= document.getElementById("txt").value;
+		domainsend= document.getElementById("txt2").value;
+		fixlink();
+		fixdomain();
+		alert(urlsend);
+		alert(domainsend);		
+		clearText();
+		document.getElementById("myform").submit();
+	}
+	function go()
+	{
+		document.getElementById("txt").focus();
+ 		document.getElementById("txt").select();
+	}
+	function clearText()
+	{
+		document.getElementById("temptxt").value=urlsend;
+		document.getElementById("txt").value="";
+		document.getElementById("temptxt2").value=domainsend;
+		document.getElementById("txt2").value="";
+	}
+	function fixlink()
+	{ 
+		var str = "";
+		for(i = 0; i < 4; i++)
+		{
+			str = str + urlsend[i];
+		}
+		if(str !="http")
+		{
+			urlsend = "http://" + urlsend;
+		}
+	}
+	function fixdomain()
+	{ 
+		var str = "";
+		for(i = 0; i < 4; i++)
+		{
+			str = str + domainsend[i];
+		}
+		if(str !="http")
+		{
+			domainsend = "http://" + domainsend;
+		}
+	}
+	function dealwithload(broke, length)
+	{
+		broken=broke;
+		brokelength=length;
+		var a="";
+		for(i=0;i<brokelength;i++)
+		{
+			a+="<ul>"+broken[i]+"</ul>";
+		}
+		document.getElementById("inright").innerHTML=a;
+	
+	}
+	function makeTable()
+	{
+	  var list = document.createElement('ul');
+
+    	  for(var i = 0; i < brokelength; i++)
+	  {
+       	 var item = document.createElement('li');
+        	 item.appendChild(document.createTextNode(broken[i]));
+       	 list.appendChild(item);
+         }
+
+  	return list;
+	}
+	
+</script>
+<style>
+	body
+	{	
+	  background-image:url(linkc.png); 
+	  background-repeat: no-repeat;
+	  background-size: cover;
+	}
+	#direction
+	{
+		text-align:center;
+		font-style: oblique;
+		font-family: "Comic Sans MS", cursive, sans-serif;
+	   	font-weight: 100;
+		font-size: 100%;
+	}
+	#direction2
+	{
+		text-align:center;
+		font-style: oblique;
+		font-family: "Comic Sans MS", cursive, sans-serif;
+	   	font-weight: 100;
+		font-size: 100%;
+	}
+	#left
+	{
+		width: 450px;
+		height: 300px;
+		background-color:none;
+		border: 4px solid #78AB46;
+		border-radius: 40px;
+		position:fixed;
+		margin:0;
+		padding:0;
+		top:25%;
+		right:64%;
+		text-align:center;
+	}
+	#right
+	{
+		width: 450px;
+		height: 300px;
+		background-color:none;
+		border: 4px solid #78AB46;
+		border-radius: 40px;
+		position:fixed;
+		margin:0;
+		padding:0;
+		top:25%;
+		right:12%;
+		text-align:center;
+	}
+	#descript
+	{
+		text-align:center;
+		font-style: oblique;
+		font-family: "Comic Sans MS", cursive, sans-serif;
+	   	font-weight: 300;
+		font-size: 200%;
+	}	
+	}
+</style>
+</html>
