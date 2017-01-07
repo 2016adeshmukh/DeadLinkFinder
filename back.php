@@ -135,7 +135,7 @@ while ($arrlength<1500 && $arrlengththree>0)
 	$arrlengthfour=$arrlength;
 	$a=$arrlengthtwo;
 	$b=$arrlengthfour;
-	$arrlengththree=$arrlengthfour-$arrlengthtwo;	
+	$arrlengththree = $arrlengthfour - $arrlengthtwo;	
 }
 function check_url($url) {
 
